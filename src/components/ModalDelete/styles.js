@@ -12,40 +12,38 @@ export const ModalTec = styled.div`
 `;
 
 export const Container = styled.form`
+  background-color: #212529;
+  width: 80%;
+  max-width: 400px;
+  padding: 15px;
   position: fixed;
   top: 50%;
   left: 50%;
+  border-radius: 8px;
   transform: translate(-50%, -50%);
-  background: var(--grey2);
 `;
-export const InputContainer = styled.div`
-  background: var(--grey1);
-  border-radius: 10px;
-  border: 2px solid var(--gray);
-  color: var(--gray);
+export const InputContainerModal = styled.div`
+  background: #343b41;
+  border: 2px solid transparent;
   padding: 1rem;
   width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   transition: 0.4s;
-
-  select {
-    background: transparent;
-    align-items: center;
-    flex: 1;
-    border: 0;
-    color: var(--grey2);
-    &::placeholder {
-      color: var(--gray);
-    }
+  margin-bottom: 20px;
+  h3 {
+    font-family: "Inter";
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    color: #f8f9fa;
   }
-  input {
-    background: transparent;
-    align-items: center;
-    flex: 1;
-    border: 0;
-    color: var(--black);
-    &::placeholder {
-      color: var(--gray);
-    }
+  span {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: #868e96;
+    cursor: pointer;
   }
 `;

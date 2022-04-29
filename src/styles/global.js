@@ -3,7 +3,6 @@ export const GlobalStyle = createGlobalStyle`
 *{
      margin:0;
      padding: 0;
-     background: white;
      box-sizing: border-box;
      outline: 0;
      font-family: Open-Sans, Arial, Helvetica, sans-serif;
@@ -17,11 +16,13 @@ export const GlobalStyle = createGlobalStyle`
     --red:#c53030;
     --greyKenzie: #212529;
     --pinkKenzie: #FF577F;
-    --grey2:#343B41;
+    --gry2:#343B41;
     --grey1:#868E96;
+    --greyback:#121214
+    --graylist:#f8f9fa;
 }
 body{
-    background: var(--red);
+    background-color: var(--greyback);
     color: var(--black);
 }
 border-style, input, button{

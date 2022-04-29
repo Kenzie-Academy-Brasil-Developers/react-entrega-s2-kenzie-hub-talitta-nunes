@@ -4,8 +4,7 @@ import SelectModal from "../SelectModal";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Container, ModalTec } from "./styles";
-import { InputContainer } from "../Input/styles";
+import { Container, ModalTec, InputContainerModal } from "./styles";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 
@@ -21,8 +20,7 @@ function Modal({ isModalVisible, modalOn, setIsModalVisible, token }) {
         toast.error("Requisição falhou!");
         console.log(err);
       })
-      .then((response) => response.data);
-    setIsModalVisible(false);
+      .then((response) => setIsModalVisible(false));
     //console.log(data);
   };
 
@@ -40,10 +38,10 @@ function Modal({ isModalVisible, modalOn, setIsModalVisible, token }) {
   return (
     <ModalTec isModalVisible={isModalVisible}>
       <Container onSubmit={handleSubmit(createTechs)}>
-        <InputContainer>
+        <InputContainerModal>
           <h3>Cadastrar Tecnologias</h3>
           <span onClick={() => modalOn()}>X</span>
-        </InputContainer>
+        </InputContainerModal>
         <Input
           placeholder="Tecnologia"
           register={register}
@@ -55,7 +53,9 @@ function Modal({ isModalVisible, modalOn, setIsModalVisible, token }) {
           register={register}
           name="status"
         />
-        <Button type="submit">Cadastrar</Button>
+        <Button buttonSchema="pinkButton" type="submit">
+          Cadastrar Tecnologia
+        </Button>
       </Container>
     </ModalTec>
   );

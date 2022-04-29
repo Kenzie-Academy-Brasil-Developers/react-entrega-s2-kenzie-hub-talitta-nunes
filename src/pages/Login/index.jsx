@@ -1,5 +1,5 @@
 import Button from "../../components/Button";
-import { AnimationContainer, Background, Container, Content } from "./styles";
+import { AnimationContainer, Container, Content } from "./styles";
 import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -53,39 +53,42 @@ function Login({ authenticated, setAuthenticated }) {
 
   return (
     <Container>
-      <Content>
-        <AnimationContainer>
-          <form onSubmit={handleSubmit(handleLogin)}>
-            <h1>Login</h1>
-            <Input
-              register={register}
-              label="Email"
-              placeholder="Digite seu e-mail"
-              name="email"
-              error={errors.email?.message}
-            />
-            <Input
-              register={register}
-              label="Senha"
-              placeholder="Coloque sua senha"
-              type="password"
-              name="password"
-              error={errors.password?.message}
-            />
-            <Button pinkSchema type="submit">
-              Entrar
-            </Button>
-            <p>Não não possui conta?</p>
-            <Button
-              onClick={() => handleNavigationLogin("/register")}
-              type="button"
-            >
-              Cadastre-se
-            </Button>
-          </form>
-        </AnimationContainer>
-      </Content>
-      <Background />
+      <div className="container_Form">
+        <h1>KenzieHub</h1>
+        <Content>
+          <AnimationContainer>
+            <form onSubmit={handleSubmit(handleLogin)}>
+              <h2>Login</h2>
+              <Input
+                register={register}
+                label="Email"
+                placeholder="Digite seu e-mail"
+                name="email"
+                error={errors.email?.message}
+              />
+              <Input
+                register={register}
+                label="Senha"
+                placeholder="Coloque sua senha"
+                type="password"
+                name="password"
+                error={errors.password?.message}
+              />
+              <Button buttonSchema="pinkButton" type="submit">
+                Entrar
+              </Button>
+              <p>Ainda não possui uma conta?</p>
+              <Button
+                buttonSchema="grayButton"
+                onClick={() => handleNavigationLogin("/register")}
+                type="button"
+              >
+                Cadastre-se
+              </Button>
+            </form>
+          </AnimationContainer>
+        </Content>
+      </div>
     </Container>
   );
 }

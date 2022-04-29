@@ -2,10 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: left;
+  label {
+    color: #f8f9fa;
+    text-align: left;
+  }
 `;
 
 export const InputContainer = styled.div`
-  background: var(--grey1);
+  background: #343b41;
   border-radius: 10px;
   border: 2px solid var(--gray);
   color: var(--gray);

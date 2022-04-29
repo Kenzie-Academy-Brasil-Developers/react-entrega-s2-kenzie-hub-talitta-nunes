@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
-import { Container, Content, TechContainer } from "./styles";
+import { Container, Content, TechList, InnerContainer } from "./styles";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import ListTech from "../../components/ListTech";
 import ListUser from "../../components/ListUser";
+import Header from "../../components/Header";
 
 function Home({ authenticated }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [tech, setTech] = useState([]);
-  const [isModalDel, setIsModalDel] = useState(false);
-  const [nameUser, setNameUser] = useState([]);
+  const [list, setList] = useState(false);
+  const [nameUser, setNameUser] = useState({});
   const [token] = useState(
     JSON.parse(localStorage.getItem("@KenzieHub:token")) || ""
   );
@@ -23,7 +24,7 @@ function Home({ authenticated }) {
     setIsModalVisible(!isModalVisible);
   };
 
-  function loadTechs() {
+  useEffect(() => {
     api
       .get(`/users/${id}`)
       .catch((err) => {
@@ -32,59 +33,58 @@ function Home({ authenticated }) {
       })
       .then((response) => {
         setTech(response.data.techs);
-        const { name, course_module } = setNameUser(response.data);
-        toast.success("Sucesso, Kenzinho!");
+        const { name, course_module } = response.data;
+        setNameUser({ name, course_module });
       });
-  }
-
-  useEffect(() => {
-    loadTechs();
-  }, [setIsModalVisible, setIsModalDel]);
+  }, [isModalVisible, list]);
 
   if (!authenticated) {
     return <Redirect to="/login" />;
   }
   return (
     <Container>
-      <TechContainer>
+      <InnerContainer>
+        <Header />
+
         <ListUser
           name={nameUser.name}
           course_module={nameUser.course_module}
           id={nameUser.id}
         />
-      </TechContainer>
-      <Modal
-        isModalVisible={isModalVisible}
-        modalOn={modalOn}
-        token={token}
-        setIsModalVisible={setIsModalVisible}
-      />
-      <Content>
-        <h1>KenzieHub</h1>
-        <div>
+
+        <Modal
+          isModalVisible={isModalVisible}
+          modalOn={modalOn}
+          token={token}
+          setIsModalVisible={setIsModalVisible}
+        />
+        <Content>
+          <h3>Tecnologias</h3>
+
           <Button
+            sair
             pinkSchema
             onClick={() => modalOn()}
             whiteSchema
             type="button"
           >
-            Create
+            +
           </Button>
-        </div>
-      </Content>
-      <TechContainer>
-        {tech.map((techS) => (
-          <ListTech
-            title={techS.title}
-            status={techS.status}
-            key={techS.id}
-            id={techS.id}
-            setIsModalDel={setIsModalDel}
-            isModalDel={isModalDel}
-            token={token}
-          />
-        ))}
-      </TechContainer>
+        </Content>
+        <TechList>
+          {tech.map((techS) => (
+            <ListTech
+              title={techS.title}
+              status={techS.status}
+              key={techS.id}
+              id={techS.id}
+              token={token}
+              list={list}
+              setList={setList}
+            />
+          ))}
+        </TechList>
+      </InnerContainer>
     </Container>
   );
 }

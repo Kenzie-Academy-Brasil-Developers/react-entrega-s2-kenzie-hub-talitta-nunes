@@ -3,7 +3,7 @@ import { Container, InputContainer } from "./styles";
 function Select({ label, register, name, ...rest }) {
   return (
     <Container>
-      <div>{label}</div>
+      <label>{label}</label>
       <InputContainer>
         <select {...register(name)} {...rest}>
           <option value="" hidden>

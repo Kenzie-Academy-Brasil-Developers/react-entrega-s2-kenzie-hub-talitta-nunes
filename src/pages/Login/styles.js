@@ -1,26 +1,40 @@
 import styled from "styled-components";
 import { keyframes } from "styled-components";
-//import KenzieHub from "../../assets/KenzieHub2.svg";
 
 export const Container = styled.div`
   height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items: stretch;
-`;
-export const Background = styled.div`
-  @media (min-width: 1100px) {
-    flex: 1;
-    background: var(--black);
-    background-size: contain;
+  align-items: center;
+  justify-content: center;
+  background-color: #121214;
+  .container_Form {
+    h1 {
+      color: #ff577f;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    div {
+      color: var(--gray);
+    }
   }
 `;
+
 export const Content = styled.div`
+  background-color: #212529;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   max-width: 700px;
+  max-height: 400px;
+  margin: 10px;
+  color: #f8f9fa;
+  h2 {
+    color: #f8f9fa;
+  }
 `;
 const appearFromRight = keyframes`
 from{

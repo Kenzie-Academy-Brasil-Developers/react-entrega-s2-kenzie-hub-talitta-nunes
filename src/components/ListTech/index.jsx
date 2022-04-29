@@ -2,10 +2,13 @@
 import { Container } from "./styles";
 //import { useState } from "react";
 import ModalDelete from "../ModalDelete";
+import { useState } from "react";
 
-function ListTech({ title, status, id, token, isModalDel, setIsModalDel }) {
+function ListTech({ title, status, list, setList, id, token }) {
+  const [isModalDel, setIsModalDel] = useState(false);
   const modalDelOn = () => {
     setIsModalDel(!isModalDel);
+    setList(!list);
   };
 
   return (
@@ -19,6 +22,8 @@ function ListTech({ title, status, id, token, isModalDel, setIsModalDel }) {
         status={status}
         setIsModalDel={setIsModalDel}
         onClick={modalDelOn}
+        list={list}
+        setList={setList}
         id={id}
       />
 

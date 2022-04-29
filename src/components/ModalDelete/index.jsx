@@ -3,10 +3,20 @@ import Input from "../Input";
 import SelectModal from "../SelectModal";
 import { useForm } from "react-hook-form";
 import { Container, ModalTec } from "./styles";
-import { InputContainer } from "../Input/styles";
 import { api } from "../../services/api";
+//import { useState } from "react";
+import { InputContainerModal } from "../Modal/styles";
 
-function ModalDelete({ isModalDel, modalDelOn, setIsModalDel, token, title, id}) {
+function ModalDelete({
+  modalDelOn,
+  token,
+  title,
+  id,
+  list,
+  setList,
+  isModalDel,
+  setIsModalDel,
+}) {
   const handleDelete = () => {
     api
       .delete(`/users/techs/${id}`, {
@@ -14,8 +24,10 @@ function ModalDelete({ isModalDel, modalDelOn, setIsModalDel, token, title, id})
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => response.data);
-    setIsModalDel(false);
+      .then((response) => {
+        setIsModalDel(!isModalDel);
+        setList(!list);
+      });
   };
 
   const { register, handleSubmit } = useForm();
@@ -23,13 +35,14 @@ function ModalDelete({ isModalDel, modalDelOn, setIsModalDel, token, title, id})
   return (
     <ModalTec isModalDel={isModalDel}>
       <Container onSubmit={handleSubmit()}>
-        <InputContainer>
+        <InputContainerModal>
           <h3>Detalhes da Tecnologia</h3>
           <span onClick={() => modalDelOn()}>X</span>
-        </InputContainer>
+        </InputContainerModal>
         <Input
+          disabled
           label="Nome da Tecnologia"
-          placeholder="Tecnologia"
+          placeholder={title}
           register={register}
           name={title}
           error=""
@@ -40,8 +53,12 @@ function ModalDelete({ isModalDel, modalDelOn, setIsModalDel, token, title, id})
           register={register}
           name="status"
         />
-        <Button onClick={handleDelete} type="button">Excluir</Button>
-        <Button type="submit">Alterar</Button>
+        <Button buttonSchema="grayButton" onClick={handleDelete} type="button">
+          Excluir
+        </Button>
+        <Button buttonSchema="disabled" type="button">
+          Alterar
+        </Button>
       </Container>
     </ModalTec>
   );
